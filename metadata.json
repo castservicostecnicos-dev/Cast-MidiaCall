@@ -1,0 +1,8 @@
+{
+  "name": "CAST MidiaCall",
+  "description": "Sistema completo de gerenciamento e exibição CAST MidiaCall com PWA, playlists, operadores e chamadas em tempo real nos players.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

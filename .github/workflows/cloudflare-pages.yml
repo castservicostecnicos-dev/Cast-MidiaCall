@@ -1,0 +1,44 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy to Cloudflare
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Build application for Cloudflare Pages
+        run: npm run build
+        env:
+          NODE_ENV: production
+          # Se o seu backend estiver em outra URL, descomente e preencha:
+          # VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+      # NOTA: O Cloudflare Pages possui integração nativa direta com o GitHub.
+      # Ao conectar seu repositório diretamente no painel do Cloudflare Pages,
+      # o Cloudflare faz o build e deploy automático sem precisar desta action!
+      #
+      # Caso prefira fazer o deploy via GitHub Actions com API Token, descomente o passo abaixo:
+      # - name: Deploy to Cloudflare Pages via Wrangler
+      #   uses: cloudflare/wrangler-action@v3
+      #   with:
+      #     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      #     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      #     command: pages deploy dist --project-name=midia-indoor

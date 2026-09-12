@@ -1,0 +1,22 @@
+# ==============================================================================
+# Cloudflare Pages & Workers Configuration
+# ==============================================================================
+
+name = "cast-midiacall"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Diretório de saída estática para o Cloudflare Pages
+pages_build_output_dir = "dist"
+
+# Variáveis de ambiente para execução na Edge
+[vars]
+ENVIRONMENT = "production"
+# Se o seu backend Express/Node estiver rodando em outro servidor (ex: Cloud Run, VPS, Railway):
+# BACKEND_URL = "https://seu-backend.com"
+
+# Compatibilidade com Cloudflare Workers (Static Assets)
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"

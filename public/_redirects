@@ -1,0 +1,3 @@
+# Cloudflare Pages SPA Redirect Rules
+# Ensures all client-side routes, URL query params (?token=..., ?player=...) and SPA paths resolve to index.html
+/*    /index.html   200
